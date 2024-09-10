@@ -1,4 +1,5 @@
-import { View, Text, FlatList, Image } from "react-native";
+import { View, Text, FlatList, Image, RefreshControl } from "react-native";
+import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useGlobalContext } from "../../context/GlobalProvider";
@@ -10,13 +11,20 @@ import EmptyState from "../../components/EmptyState";
 import { images } from "../../constants/";
 
 const Home = () => {
+    const [refreshing, setRefreshing] = useState(false);
+
     const { user } = useGlobalContext();
+
+    const onRefresh = async () => {
+        setRefreshing(true);
+        // fetch data
+        setRefreshing(false);
+    };
 
     return (
         <SafeAreaView className="bg-primary h-full">
             <FlatList
-                // data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
-                // data={}
+                data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
                 keyExtractor={(item) => item.$id}
                 renderItem={({ item }) => (
                     <Text className="text-3xl text-white">{item.id}</Text>
@@ -59,6 +67,12 @@ const Home = () => {
                         subtitle="Be the first to upload a video"
                     />
                 )}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                    />
+                }
             />
         </SafeAreaView>
     );
