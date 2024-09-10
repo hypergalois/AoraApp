@@ -5,6 +5,7 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
+import EmptyState from "../../components/EmptyState";
 
 import { images } from "../../constants/";
 
@@ -14,7 +15,8 @@ const Home = () => {
     return (
         <SafeAreaView className="bg-primary h-full">
             <FlatList
-                data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+                // data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+                // data={}
                 keyExtractor={(item) => item.$id}
                 renderItem={({ item }) => (
                     <Text className="text-3xl text-white">{item.id}</Text>
@@ -52,11 +54,10 @@ const Home = () => {
                     </View>
                 )}
                 ListEmptyComponent={() => (
-                    <View className="justify-center items-center flex-1">
-                        <Text className="text-xl text-white">
-                            No videos to show
-                        </Text>
-                    </View>
+                    <EmptyState
+                        title="No videos found"
+                        subtitle="Be the first to upload a video"
+                    />
                 )}
             />
         </SafeAreaView>
