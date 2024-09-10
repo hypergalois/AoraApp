@@ -1,5 +1,12 @@
-import { View, Text, FlatList, Image, RefreshControl } from "react-native";
-import { useState } from "react";
+import {
+    View,
+    Text,
+    FlatList,
+    Image,
+    RefreshControl,
+    Alert,
+} from "react-native";
+import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useGlobalContext } from "../../context/GlobalProvider";
@@ -8,26 +15,31 @@ import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
 
+import { getAllPosts } from "../../lib/content";
+import useAppwrite from "../../lib/useAppwrite";
+
 import { images } from "../../constants/";
 
 const Home = () => {
-    const [refreshing, setRefreshing] = useState(false);
+    const { data: posts, isLoading, refreshData } = useAppwrite(getAllPosts);
+
+    const [isRefreshing, setIsRefreshing] = useState(false);
 
     const { user } = useGlobalContext();
 
     const onRefresh = async () => {
-        setRefreshing(true);
-        // fetch data
-        setRefreshing(false);
+        setIsRefreshing(true);
+        await refreshData();
+        setIsRefreshing(false);
     };
 
     return (
         <SafeAreaView className="bg-primary h-full">
             <FlatList
-                data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+                data={posts}
                 keyExtractor={(item) => item.$id}
                 renderItem={({ item }) => (
-                    <Text className="text-3xl text-white">{item.id}</Text>
+                    <Text className="text-3xl text-white">{item.title}</Text>
                 )}
                 ListHeaderComponent={() => (
                     <View className="my-6 px-4 spacy-y-6">
@@ -69,7 +81,7 @@ const Home = () => {
                 )}
                 refreshControl={
                     <RefreshControl
-                        refreshing={refreshing}
+                        refreshing={isRefreshing}
                         onRefresh={onRefresh}
                     />
                 }
