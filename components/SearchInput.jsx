@@ -1,5 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
-import { useState } from "react";
+import { View, TextInput, TouchableOpacity, Image } from "react-native";
 
 import { icons } from "../constants";
 
@@ -12,8 +11,6 @@ const SearchInput = ({
     keyboardType,
     ...props
 }) => {
-    const [showPassword, setShowPassword] = useState(false);
-
     return (
         <View className="w-full bg-black-100 border-2 border-black-200 h-16 rounded-2xl px-4 focus:border-secondary items-center flex-row space-x-4">
             <TextInput
@@ -23,7 +20,6 @@ const SearchInput = ({
                 onChangeText={handleChangeText}
                 keyboardType={keyboardType}
                 {...props}
-                secureTextEntry={title === "Password" && !showPassword}
                 className="flex-1 text-base mt-0.5 font-pregular text-white"
             />
 

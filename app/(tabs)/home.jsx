@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 import SearchInput from "../../components/SearchInput";
+import Trending from "../../components/Trending";
 
 import { images } from "../../constants/";
 
@@ -13,11 +14,10 @@ const Home = () => {
     return (
         <SafeAreaView className="bg-primary h-full">
             <FlatList
-                key={"$id"}
                 data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
                 keyExtractor={(item) => item.$id}
                 renderItem={({ item }) => (
-                    <Text className="text-3xl">{item.id}</Text>
+                    <Text className="text-3xl text-white">{item.id}</Text>
                 )}
                 ListHeaderComponent={() => (
                     <View className="my-6 px-4 spacy-y-6">
@@ -38,7 +38,24 @@ const Home = () => {
                                 />
                             </View>
                         </View>
-                        <SearchInput />
+                        <SearchInput placeholder={"Search for a video topic"} />
+
+                        <View className="w-full flex-1 pt-5 pb-8">
+                            <Text className="text-lg text-gray-100 font-pregular mb-3">
+                                Trending videos
+                            </Text>
+
+                            <Trending
+                                posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []}
+                            />
+                        </View>
+                    </View>
+                )}
+                ListEmptyComponent={() => (
+                    <View className="justify-center items-center flex-1">
+                        <Text className="text-xl text-white">
+                            No videos to show
+                        </Text>
                     </View>
                 )}
             />
