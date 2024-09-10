@@ -14,6 +14,7 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
+import VideoCard from "../../components/VideoCard";
 
 import { getAllPosts } from "../../lib/content";
 import useAppwrite from "../../lib/useAppwrite";
@@ -38,9 +39,7 @@ const Home = () => {
             <FlatList
                 data={posts}
                 keyExtractor={(item) => item.$id}
-                renderItem={({ item }) => (
-                    <Text className="text-3xl text-white">{item.title}</Text>
-                )}
+                renderItem={({ item }) => <VideoCard video={item} />}
                 ListHeaderComponent={() => (
                     <View className="my-6 px-4 spacy-y-6">
                         <View className="justify-between items-start flex-row mb-6">
