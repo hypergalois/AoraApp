@@ -15,7 +15,7 @@ export default function App() {
 
     useEffect(() => {
         if (!isLoading && isLoggedIn) {
-            router.push("/home");
+            router.replace("/home");
         }
     }, [isLoading, isLoggedIn]);
 
