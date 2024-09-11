@@ -1,16 +1,24 @@
-import { View, Text, FlatList, RefreshControl } from "react-native";
+import {
+    View,
+    Text,
+    FlatList,
+    RefreshControl,
+    TouchableOpacity,
+    Image,
+} from "react-native";
 import { useEffect, useState } from "react";
-import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useGlobalContext } from "../../context/GlobalProvider";
 
-import SearchInput from "../../components/SearchInput";
 import EmptyState from "../../components/EmptyState";
 import VideoCard from "../../components/VideoCard";
+import InfoBox from "../../components/InfoBox";
 
 import { getUserPosts } from "../../lib/content";
 import useAppwrite from "../../lib/useAppwrite";
+
+import { icons } from "../../constants";
 
 const Profile = () => {
     const { user, setIsLoggedIn } = useGlobalContext();
@@ -29,6 +37,8 @@ const Profile = () => {
         setIsRefreshing(false);
     };
 
+    const logout = async () => {};
+
     return (
         <SafeAreaView className="bg-primary h-full">
             <FlatList
@@ -36,16 +46,45 @@ const Profile = () => {
                 keyExtractor={(item) => item.$id}
                 renderItem={({ item }) => <VideoCard video={item} />}
                 ListHeaderComponent={() => (
-                    <View className="my-6 px-4 spacy-y-6">
-                        <View className="justify-between items-start flex-row mb-6">
-                            <View>
-                                <Text className="font-pmedium text-sm text-gray-100">
-                                    Search results
-                                </Text>
-                                <Text className="text-2xl font-psemibold text-white">
-                                    hola
-                                </Text>
-                            </View>
+                    <View className="w-full justify-center items-center mt-6 mb-12 px-4">
+                        <TouchableOpacity
+                            onPress={logout}
+                            className="w-full items-end mb-10"
+                        >
+                            <Image
+                                source={icons.logout}
+                                className="W-6 h-6"
+                                resizeMode="contain"
+                            />
+                        </TouchableOpacity>
+
+                        <View className="w-16 h-16 border border-secondary rounded-lg justify-center items-center">
+                            <Image
+                                source={{ uri: user?.avatar }}
+                                className="w-[95%] h-[95%] rounded-lg"
+                                resizeMode="cover"
+                            />
+                        </View>
+
+                        <InfoBox
+                            title={user?.username}
+                            containerStyles="mt-5"
+                            textStyles="text-lg"
+                        />
+
+                        <View className="mt-5 flex-row">
+                            <InfoBox
+                                title={userPosts.length || 0}
+                                subtitle="Posts"
+                                containerStyles="mr-10"
+                                textStyles="text-xl"
+                            />
+
+                            <InfoBox
+                                title="3.5k"
+                                subtitle="Followers"
+                                textStyles="text-xl"
+                            />
                         </View>
                     </View>
                 )}
