@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
 
 import { useGlobalContext } from "../../context/GlobalProvider";
 
@@ -16,12 +17,13 @@ import VideoCard from "../../components/VideoCard";
 import InfoBox from "../../components/InfoBox";
 
 import { getUserPosts } from "../../lib/content";
+import { signOut } from "../../lib/auth";
 import useAppwrite from "../../lib/useAppwrite";
 
 import { icons } from "../../constants";
 
 const Profile = () => {
-    const { user, setIsLoggedIn } = useGlobalContext();
+    const { user, setUser, setIsLoggedIn } = useGlobalContext();
 
     const {
         data: userPosts,
@@ -37,7 +39,13 @@ const Profile = () => {
         setIsRefreshing(false);
     };
 
-    const logout = async () => {};
+    const logout = async () => {
+        await signOut();
+        setUser(null);
+        setIsLoggedIn(false);
+
+        router.replace("/sign-in");
+    };
 
     return (
         <SafeAreaView className="bg-primary h-full">

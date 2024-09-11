@@ -31,6 +31,7 @@ const SignIn = () => {
 
         try {
             await signIn(form.email, form.password);
+
             const result = await getCurrentUser();
 
             setUser(result);
