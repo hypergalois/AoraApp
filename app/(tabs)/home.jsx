@@ -16,13 +16,15 @@ import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
 import VideoCard from "../../components/VideoCard";
 
-import { getAllPosts } from "../../lib/content";
+import { getAllPosts, getLatestPosts } from "../../lib/content";
 import useAppwrite from "../../lib/useAppwrite";
 
 import { images } from "../../constants/";
 
 const Home = () => {
     const { data: posts, isLoading, refreshData } = useAppwrite(getAllPosts);
+    const { data: latestPosts, isLoading: isLatestLoading } =
+        useAppwrite(getLatestPosts);
 
     const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -66,9 +68,7 @@ const Home = () => {
                                 Trending videos
                             </Text>
 
-                            <Trending
-                                posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []}
-                            />
+                            <Trending posts={latestPosts ?? []} />
                         </View>
                     </View>
                 )}
