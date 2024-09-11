@@ -1,29 +1,40 @@
-import { View, TextInput, TouchableOpacity, Image } from "react-native";
+import { View, TextInput, TouchableOpacity, Image, Alert } from "react-native";
+import { useEffect, useState } from "react";
+import { router, usePathname } from "expo-router";
 
 import { icons } from "../constants";
 
-const SearchInput = ({
-    title,
-    value,
-    placeholder,
-    handleChangeText,
-    otherStyles,
-    keyboardType,
-    ...props
-}) => {
+const SearchInput = ({ placeholder, initialQuery, ...props }) => {
+    const pathname = usePathname();
+    const [query, setQuery] = useState(initialQuery || "");
+
     return (
         <View className="w-full bg-black-100 border-2 border-black-200 h-16 rounded-2xl px-4 focus:border-secondary items-center flex-row space-x-4">
             <TextInput
-                value={value}
+                value={query}
                 placeholder={placeholder}
-                placeholderTextColor={"#7B7B8B"}
-                onChangeText={handleChangeText}
-                keyboardType={keyboardType}
+                placeholderTextColor={"#CDCDE0"}
+                onChangeText={setQuery}
                 {...props}
                 className="flex-1 text-base mt-0.5 font-pregular text-white"
             />
 
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => {
+                    if (!query) {
+                        return Alert.alert(
+                            "No search query provided",
+                            "Please enter a search query"
+                        );
+                    }
+
+                    if (pathname.startsWith("/search")) {
+                        router.setParams({ query });
+                    } else {
+                        router.push(`/search/${query}`);
+                    }
+                }}
+            >
                 <Image
                     source={icons.search}
                     resizeMode="contain"
