@@ -33,8 +33,6 @@ const Search = () => {
         }
     }, [query]);
 
-    console.log(searchResults);
-
     return (
         <SafeAreaView className="bg-primary h-full">
             <FlatList
