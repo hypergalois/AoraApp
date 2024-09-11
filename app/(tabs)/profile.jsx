@@ -41,6 +41,7 @@ const Profile = () => {
 
     const logout = async () => {
         await signOut();
+
         setUser(null);
         setIsLoggedIn(false);
 
