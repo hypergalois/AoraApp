@@ -1,7 +1,20 @@
-import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
+import {
+    View,
+    Text,
+    ScrollView,
+    TouchableOpacity,
+    Image,
+    Alert,
+} from "react-native";
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Video, ResizeMode } from "expo-av";
+import * as DocumentPicker from "expo-document-picker";
+import { router } from "expo-router";
+
+import { useGlobalContext } from "../../context/GlobalProvider";
+
+import { createPost } from "../../lib/content";
 
 import FormField from "../../components/FormField";
 
@@ -16,9 +29,60 @@ const Create = () => {
         prompt: "",
     });
 
+    const { user } = useGlobalContext();
+
     const [isUploading, setIsUploading] = useState(false);
 
-    const submit = () => {};
+    const openPicker = async (selectType) => {
+        const result = await DocumentPicker.getDocumentAsync({
+            type:
+                selectType === "image"
+                    ? ["image/png", "image/jpg", "image/jpeg"]
+                    : ["video/mp4", "video/gif"],
+        });
+
+        if (!result.canceled) {
+            Alert.alert("Document picked", JSON.stringify(result, null, 2));
+
+            if (selectType === "image") {
+                setForm((prev) => ({ ...prev, thumbnail: result.assets[0] }));
+            }
+
+            if (selectType === "video") {
+                setForm((prev) => ({ ...prev, video: result.assets[0] }));
+            }
+        } else {
+            console.log("Cancelled");
+            Alert.alert("Document not picked", JSON.stringify(result, null, 2));
+        }
+    };
+
+    const submit = async () => {
+        Alert.alert("Form Data", JSON.stringify(form, null, 2));
+
+        if (!form.title || !form.video || !form.thumbnail || !form.prompt) {
+            return Alert.alert("Error", "All fields are required");
+        }
+
+        setIsUploading(true);
+
+        try {
+            await createPost({ ...form, userId: user.$id });
+
+            Alert.alert("Success", "Post uploaded successfully");
+            router.push("/home");
+        } catch (error) {
+            Alert.alert("Error", error.message);
+        } finally {
+            setIsUploading(false);
+            setForm({
+                title: "",
+                video: null,
+                thumbnail: null,
+                prompt: "",
+            });
+        }
+    };
 
     return (
         <SafeAreaView className="bg-primary h-full">
@@ -41,14 +105,12 @@ const Create = () => {
                     <Text className="text-base font-pmedium text-gray-100">
                         Upload Video
                     </Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => openPicker("video")}>
                         {form.video ? (
                             <Video
                                 source={{ uri: form.video.uri }}
                                 className="w-full h-64 rounded-xl"
-                                useNativeControls
                                 resizeMode={ResizeMode.COVER}
-                                isLooping
                             />
                         ) : (
                             <View className="w-full h-40 px-4 bg-black-100 rounded-2xl justify-center items-center">
@@ -68,7 +130,7 @@ const Create = () => {
                     <Text className="text-base font-pmedium text-gray-100">
                         Thumbnail image
                     </Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => openPicker("image")}>
                         {form.thumbnail ? (
                             <Image
                                 source={{ uri: form.thumbnail.uri }}
@@ -95,7 +157,7 @@ const Create = () => {
                     value={form.prompt}
                     placeholder="The prompt you used to generate this video"
                     handleChangeText={(text) =>
-                        setForm((prev) => ({ ...prev, title: text }))
+                        setForm((prev) => ({ ...prev, prompt: text }))
                     }
                     otherStyles="mt-7"
                 />
