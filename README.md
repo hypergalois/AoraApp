@@ -27,24 +27,24 @@ La aplicación permite a los usuarios explorar videos recientes, buscar contenid
 
 ### 1. Home: Videos Recientes y Barra de Búsqueda
 
-<img src="./assets/readme/1.png" alt="Home" width="50%">
+<img src="./assets/readme/1.png" alt="Home" width="30%">
 
 ### 2. Búsqueda: Resultado al Buscar "Italy"
 
-<img src="./assets/readme/2.png" alt="Búsqueda" width="50%">
+<img src="./assets/readme/2.png" alt="Búsqueda" width="30%">
 
 ### 3. Perfil del Usuario: Videos Subidos
 
-<img src="./assets/readme/3.png" alt="Perfil" width="50%">
+<img src="./assets/readme/3.png" alt="Perfil" width="30%">
 
 ### 4. Subir Video: Formulario de Creación
 
-<img src="./assets/readme/4.png" alt="Subir Video" width="50%">
+<img src="./assets/readme/4.png" alt="Subir Video" width="30%">
 
 ### 5. Formulario de Creación con Datos Llenos
 
-<img src="./assets/readme/5.png" alt="Formulario Lleno" width="50%">
+<img src="./assets/readme/5.png" alt="Formulario Lleno" width="30%">
 
 ### 6. Home: Mostrando el Video Subido
 
-<img src="./assets/readme/6.png" alt="Video Creado" width="50%">
+<img src="./assets/readme/6.png" alt="Video Creado" width="30%">
