@@ -1,6 +1,6 @@
 # Video Sharing App
 
-Este proyecto es una aplicación de compartición de videos construida siguiendo el tutorial de [JavaScript Mastery en YouTube](https://www.youtube.com/c/JavaScriptMastery). La idea y estructura original de la app pertenecen a su equipo. Esta aplicación utiliza **React Native**, **Appwrite** como backend y **Nativewind** para los estilos. A continuación, se muestra una breve descripción de la funcionalidad de la aplicación y las tecnologías utilizadas.
+Este proyecto es una aplicación de compartición de videos. Esta aplicación utiliza **React Native**, **Appwrite** como backend y **Nativewind** para los estilos. A continuación, se muestra una breve descripción de la funcionalidad de la aplicación y las tecnologías utilizadas.
 
 ## 📋 Descripción
 
