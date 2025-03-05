@@ -1,10 +1,10 @@
 # Video Sharing App
 
-Este proyecto es una aplicación de compartición de videos. Esta aplicación utiliza **React Native**, **Appwrite** como backend y **Nativewind** para los estilos. A continuación, se muestra una breve descripción de la funcionalidad de la aplicación y las tecnologías utilizadas.
+This project is a video-sharing application. It uses **React Native**, **Appwrite** as the backend, and **Nativewind** for styling. Below is a brief description of the application's functionality and the technologies used.
 
-## 📋 Descripción
+## 📋 Description
 
-La aplicación permite a los usuarios explorar videos recientes, buscar contenido por palabra clave, crear y subir sus propios videos, y gestionar su perfil personal. La aplicación está optimizada para un rendimiento fluido en dispositivos móviles, con una interfaz intuitiva y animaciones dinámicas.
+The app allows users to explore recent videos, search for content by keyword, create and upload their own videos, and manage their personal profiles. It is optimized for smooth performance on mobile devices, featuring an intuitive interface and dynamic animations.
 
 ## ⚙️ Tech Stack
 
@@ -14,37 +14,37 @@ La aplicación permite a los usuarios explorar videos recientes, buscar contenid
 -   **Appwrite**
 -   **Animatable**
 
-## 🔋 Características
+## 🔋 Features
 
--   **Pantalla de Inicio**: Explora los videos más recientes y los trending, con una barra de búsqueda para encontrar contenido rápidamente.
--   **Búsqueda**: Permite buscar videos por palabras clave con resultados instantáneos.
--   **Perfil de Usuario**: Muestra los videos subidos por el usuario y estadísticas relacionadas.
--   **Subida de Video**: Los usuarios pueden subir videos con título, descripción, miniatura y prompt de IA.
--   **Formulario de Creación**: Incluye un formulario completo para la creación de videos con campos editables.
--   **Animaciones**: Interacciones suaves gracias a la biblioteca Animatable.
+-   **Home Screen**: Browse the latest trending videos with a search bar for quick content discovery.
+-   **Search**: Allows users to search for videos by keywords with instant results.
+-   **User Profile**: Displays uploaded videos and related statistics.
+-   **Video Uploading**: Users can upload videos with a title, description, thumbnail, and AI prompt.
+-   **Creation Form**: A complete form for video creation with editable fields.
+-   **Animations**: Smooth interactions powered by the Animatable library.
 
-## 🤸 Capturas de Pantalla
+## 🤸 Screenshots
 
-### 1. Home: Videos Recientes y Barra de Búsqueda
+### 1. Home: Recent Videos and Search Bar
 
 <img src="./assets/readme/1.png" alt="Home" width="30%">
 
-### 2. Búsqueda: Resultado al Buscar "Italy"
+### 2. Search: Results for "Italy"
 
-<img src="./assets/readme/2.png" alt="Búsqueda" width="30%">
+<img src="./assets/readme/2.png" alt="Search" width="30%">
 
-### 3. Perfil del Usuario: Videos Subidos
+### 3. User Profile: Uploaded Videos
 
-<img src="./assets/readme/3.png" alt="Perfil" width="30%">
+<img src="./assets/readme/3.png" alt="Profile" width="30%">
 
-### 4. Subir Video: Formulario de Creación
+### 4. Upload Video: Creation Form
 
-<img src="./assets/readme/4.png" alt="Subir Video" width="30%">
+<img src="./assets/readme/4.png" alt="Upload Video" width="30%">
 
-### 5. Formulario de Creación con Datos Llenos
+### 5. Creation Form with Filled Data
 
-<img src="./assets/readme/5.png" alt="Formulario Lleno" width="30%">
+<img src="./assets/readme/5.png" alt="Filled Form" width="30%">
 
-### 6. Home: Mostrando el Video Subido
+### 6. Home: Displaying the Uploaded Video
 
-<img src="./assets/readme/6.png" alt="Video Creado" width="30%">
+<img src="./assets/readme/6.png" alt="Created Video" width="30%">
